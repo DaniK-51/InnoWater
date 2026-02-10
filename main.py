@@ -7,7 +7,7 @@ import logging
 import other_functions
 import telebot_functions
 
-logging.basicConfig(filename=r"main.log", encoding="utf-8", level=logging.DEBUG, format="%(asctime)s %(levelname)s %(message)s")
+logging.basicConfig(filename=r"main.log", encoding="utf-8", level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger()
 
 bot = AsyncTeleBot(settings.TOKEN)
@@ -27,6 +27,7 @@ def arg_expend(func):
 bot.message_handler(["start"])(arg_expend(telebot_functions.start_cmd))
 bot.message_handler(["refill"])(arg_expend(telebot_functions.refill_cmd))
 bot.message_handler(["set"])(arg_expend(telebot_functions.set_cmd))
+bot.message_handler(["admin"])(arg_expend(telebot_functions.set_admin_cmd))
 bot.callback_query_handler(func=lambda x: re.fullmatch("start", x.data))(arg_expend(telebot_functions.start_btn))
 bot.callback_query_handler(func=lambda x: re.fullmatch("assign_to_dorm", x.data))(arg_expend(telebot_functions.assign_to_dorm_btn))
 bot.callback_query_handler(func=lambda x: re.fullmatch("assign_to_[1-7]", x.data))(arg_expend(telebot_functions.assign_to_btn))
