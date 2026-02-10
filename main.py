@@ -32,5 +32,8 @@ bot.callback_query_handler(func=lambda x: re.fullmatch("assign_to_dorm", x.data)
 bot.callback_query_handler(func=lambda x: re.fullmatch("assign_to_[1-7]", x.data))(arg_expend(telebot_functions.assign_to_btn))
 bot.callback_query_handler(func=lambda x: re.fullmatch("consume_chose", x.data))(arg_expend(telebot_functions.consume_chose_btn))
 bot.callback_query_handler(func=lambda x: re.fullmatch("consume_[1-7]", x.data))(arg_expend(telebot_functions.consume_btn))
+bot.callback_query_handler(func=lambda x: re.fullmatch("send_photo_chose", x.data))(arg_expend(telebot_functions.send_photo_chose_btn))
+bot.callback_query_handler(func=lambda x: re.fullmatch("send_photo_[1-7]", x.data))(arg_expend(telebot_functions.send_photo_btn))
+bot.message_handler(func=lambda x: True, content_types=["photo"])(arg_expend(telebot_functions.any_photo))
 
 asyncio.run(bot.infinity_polling(skip_pending=True))
