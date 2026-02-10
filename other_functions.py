@@ -34,6 +34,14 @@ def bot_start(log: logging.Logger, db: sl.Connection):
             log.error(f"Table \"users\" didn't create successfully, error: {e}")
             return 1
         log.debug(f"Table \"users\" created successfully")
+    if not "photos" in table_list:
+        log.debug(f"Table \"photos\" does not exist, creating a new one...")
+        try:
+            db.execute("CREATE TABLE photos (id INTEGER PRIMARY KEY AUTOINCREMENT, dorm INT, author_id INT, filename STRING, date STRING)")
+        except Exception as e:
+            log.error(f"Table \"photos\" didn't create successfully, error: {e}")
+            return 1
+        log.debug(f"Table \"photos\" created successfully")
     if not "dorms" in table_list:
         log.debug(f"Table \"dorms\" does not exist, creating a new one...")
         try:
